@@ -107,13 +107,12 @@ export const getPositionText: (balance: BigNumber) => 'NONE' | 'SHORT' | 'LONG' 
  * @returns the amount of time that has elapsed between previous and current
  */
 export const timeAgo: (current: number, previous: number) => string = (current, previous) => {
+    const elapsed = current - previous;
     const msPerMinute = 60 * 1000;
     const msPerHour = msPerMinute * 60;
     const msPerDay = msPerHour * 24;
     const msPerMonth = msPerDay * 30;
     const msPerYear = msPerDay * 365;
-    const elapsed = current - previous;
-
     if (elapsed < msPerMinute) {
         return Math.round(elapsed / 1000) + 's';
     } else if (elapsed < msPerHour) {
@@ -127,6 +126,37 @@ export const timeAgo: (current: number, previous: number) => string = (current, 
     } else {
         return Math.round(elapsed / msPerYear) + 'y';
     }
+};
+
+/**
+ * Formats a given amount of seconds
+ * @param seconds number of seconds to format
+ * @returns formatted seconds to readable minutes, hours, days, months, years
+ */
+export const formatSeconds: (seconds: number) => string = (seconds) => {
+    const numYears = Math.floor(seconds / 31536000);
+    const numDays = Math.floor((seconds % 31536000) / 86400); 
+    const numHours = Math.floor(((seconds % 31536000) % 86400) / 3600);
+    const numMinutes = Math.floor((((seconds % 31536000) % 86400) % 3600) / 60);
+    const numSeconds = (((seconds % 31536000) % 86400) % 3600) % 60;
+
+    let s = "";
+    if (numYears > 0) {
+        s = `${numYears} y,`
+    } 
+    if (numDays > 0) {
+        s = `${s} ${numDays} d,`
+    }
+    if (numHours > 0) {
+        s = `${s} ${numHours} h,`
+    }
+    if (numMinutes > 0) {
+        s = `${s} ${numMinutes} m,`
+    }
+    if (numSeconds > 0) {
+        s = `${s} ${numSeconds} s,`
+    }
+    return s.slice(0, -1);
 };
 
 /**

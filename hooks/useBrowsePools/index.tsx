@@ -78,6 +78,9 @@ export const useBrowsePools = (): LoadingRows<BrowseTableRowData> => {
                 } = nextPoolState;
 
                 const tvl = shortBalance.plus(longBalance).toNumber();
+                
+                const minWaitTime = pool.updateInterval > pool.frontRunningInterval ? pool.frontRunningInterval.toNumber() : pool.updateInterval.toNumber();
+                const maxWaitTime = pool.updateInterval > pool.frontRunningInterval ? minWaitTime + pool.updateInterval.toNumber() : minWaitTime + pool.frontRunningInterval.toNumber();
 
                 const defaultUpkeep = {
                     ...STATIC_DEFAULT_UPKEEP,
@@ -120,6 +123,7 @@ export const useBrowsePools = (): LoadingRows<BrowseTableRowData> => {
                         pendingTvl: formatBN(totalNetFrontRunningPendingShort, settlementToken.decimals).toNumber(),
                         estimatedTvl: formatBN(expectedFrontRunningShortBalance, settlementToken.decimals).toNumber(),
                         poolStatus,
+                        side: 'short'
                     },
                     longToken: {
                         address: longToken.address,
@@ -136,13 +140,15 @@ export const useBrowsePools = (): LoadingRows<BrowseTableRowData> => {
                         pendingTvl: formatBN(totalNetFrontRunningPendingLong, settlementToken.decimals).toNumber(),
                         estimatedTvl: formatBN(expectedFrontRunningLongBalance, settlementToken.decimals).toNumber(),
                         poolStatus,
+                        side: 'long'
                     },
                     isWaitingForUpkeep: upkeepInfo.isWaitingForUpkeep,
                     expectedExecution: upkeepInfo.expectedExecution,
                     myHoldings: userBalances.shortToken.balance.plus(userBalances.longToken.balance).toNumber(),
                     pastUpkeep: defaultUpkeep,
                     antecedentUpkeep: defaultUpkeep,
-
+                    minWaitTime,
+                    maxWaitTime,
                     keeper: keeper,
                     committer: committer.address,
                     collateralAsset: settlementToken.symbol,

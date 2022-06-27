@@ -27,6 +27,7 @@ interface BrowseTableTokenData {
     pendingTvl: number;
     estimatedTvl: number;
     poolStatus: PoolStatus;
+    side: 'Long' | 'short'
 }
 
 export interface BrowseTableRowData {
@@ -57,6 +58,9 @@ export interface BrowseTableRowData {
 
     pastUpkeep: Upkeep;
     antecedentUpkeep: Upkeep;
+
+    minWaitTime: number;
+    maxWaitTime: number;
 
     keeper: string;
     committer: string;

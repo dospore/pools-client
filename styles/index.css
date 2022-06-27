@@ -214,6 +214,10 @@ html {
 
     /* cool-gray-100 */
     --button-bg-hover: #f3f4f6;
+
+
+    --short-red: #f15025;
+    --long-green: #05cb3a;
 }
 
 html.theme-dark {

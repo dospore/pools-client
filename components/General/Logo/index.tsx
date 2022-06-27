@@ -124,7 +124,7 @@ const logos: Record<LogoTicker, any> = {
     BASE: BASE,
 };
 
-export type LogoSize = 'xs' | 'sm' | 'md' | 'lg' | 'full';
+export type LogoSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
 interface LProps {
     className?: string;
     ticker: LogoTicker;
@@ -136,6 +136,7 @@ const SIZES: Record<LogoSize, string> = {
     sm: 'w-[20px] h-[20px]',
     md: 'h-6',
     lg: 'h-[32px]',
+    xl: 'h-[42px]',
     full: 'h-full',
 };
 
