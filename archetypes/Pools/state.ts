@@ -27,7 +27,7 @@ interface BrowseTableTokenData {
     pendingTvl: number;
     estimatedTvl: number;
     poolStatus: PoolStatus;
-    side: 'Long' | 'short'
+    side: 'Long' | 'short';
 }
 
 export interface BrowseTableRowData {

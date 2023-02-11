@@ -16,20 +16,36 @@ const Available: React.FC<{
 
     return (
         <>
-            {`Available: `}
-            {isPoolToken ? (
-                <>
-                    {`${balance.toFixed(3)} `}
-                    {amountBN.gt(0) ? <span className="opacity-80">{`>>> ${balanceAfter.toFixed(3)}`}</span> : null}
-                </>
-            ) : (
-                <>
-                    {`${toApproxCurrency(balance)} `}
-                    {amountBN.gt(0) ? (
-                        <span className="opacity-80">{`>>> ${toApproxCurrency(balanceAfter)}`}</span>
-                    ) : null}
-                </>
-            )}
+            <div>
+                {`Available in wallet/escrow: `}
+                {isPoolToken ? (
+                    <>
+                        {`${balance.toFixed(3)} `}
+                        {amountBN.gt(0) ? <span className="opacity-80">{`>>> ${balanceAfter.toFixed(3)}`}</span> : null}
+                    </>
+                ) : (
+                    <>
+                        {`${toApproxCurrency(balance)} `}
+                        {amountBN.gt(0) ? (
+                            <span className="opacity-80">{`>>> ${toApproxCurrency(balanceAfter)}`}</span>
+                        ) : null}
+                    </>
+                )}
+                /
+                {isPoolToken ? (
+                    <>
+                        {`${balance.toFixed(3)} `}
+                        {amountBN.gt(0) ? <span className="opacity-80">{`>>> ${balanceAfter.toFixed(3)}`}</span> : null}
+                    </>
+                ) : (
+                    <>
+                        {`${toApproxCurrency(balance)} `}
+                        {amountBN.gt(0) ? (
+                            <span className="opacity-80">{`>>> ${toApproxCurrency(balanceAfter)}`}</span>
+                        ) : null}
+                    </>
+                )}
+            </div>
         </>
     );
 };

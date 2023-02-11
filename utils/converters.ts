@@ -135,26 +135,26 @@ export const timeAgo: (current: number, previous: number) => string = (current, 
  */
 export const formatSeconds: (seconds: number) => string = (seconds) => {
     const numYears = Math.floor(seconds / 31536000);
-    const numDays = Math.floor((seconds % 31536000) / 86400); 
+    const numDays = Math.floor((seconds % 31536000) / 86400);
     const numHours = Math.floor(((seconds % 31536000) % 86400) / 3600);
     const numMinutes = Math.floor((((seconds % 31536000) % 86400) % 3600) / 60);
     const numSeconds = (((seconds % 31536000) % 86400) % 3600) % 60;
 
-    let s = "";
+    let s = '';
     if (numYears > 0) {
-        s = `${numYears} y,`
-    } 
+        s = `${numYears} y,`;
+    }
     if (numDays > 0) {
-        s = `${s} ${numDays} d,`
+        s = `${s} ${numDays} d,`;
     }
     if (numHours > 0) {
-        s = `${s} ${numHours} h,`
+        s = `${s} ${numHours} h,`;
     }
     if (numMinutes > 0) {
-        s = `${s} ${numMinutes} m,`
+        s = `${s} ${numMinutes} m,`;
     }
     if (numSeconds > 0) {
-        s = `${s} ${numSeconds} s,`
+        s = `${s} ${numSeconds} s,`;
     }
     return s.slice(0, -1);
 };
